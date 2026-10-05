@@ -1,0 +1,55 @@
+# Runs the StockLane keeper every 15 minutes.
+# Repo settings (Settings > Secrets and variables > Actions):
+#   secret   KEEPER_PRIVATE_KEY   set by: node tools/wallet.js keeper-secret
+#   secret   ROBINHOOD_RPC_URL    optional private RPC (also set by keeper-secret when launch.env has one)
+#   variable KEEPER_LIVE          0 = dry run (simulate and log only), 1 = send transactions
+name: Keeper
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: keeper
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Skip until StockLane is deployed
+        id: deployed
+        run: |
+          if [ -f contracts/deployments/robinhood.json ]; then echo "yes=1" >> "$GITHUB_OUTPUT"; else echo "No contracts/deployments/robinhood.json yet: nothing to keep."; fi
+
+      - uses: actions/setup-node@v4
+        if: steps.deployed.outputs.yes == '1'
+        with:
+          node-version: 22
+
+      - name: Install keeper
+        if: steps.deployed.outputs.yes == '1'
+        working-directory: keeper
+        run: npm ci --no-audit --no-fund
+
+      - name: Run one keeper cycle
+        if: steps.deployed.outputs.yes == '1'
+        working-directory: keeper
+        env:
+          KEEPER_PRIVATE_KEY: ${{ secrets.KEEPER_PRIVATE_KEY }}
+          RPC_URL: ${{ secrets.ROBINHOOD_RPC_URL || 'https://rpc.mainnet.chain.robinhood.com' }}
+          KEEPER_NETWORK: robinhood
+          KEEPER_CONFIG: actions.config.json
+          DRY_RUN: ${{ vars.KEEPER_LIVE == '1' && '0' || '1' }}
+        run: |
+          if [ "$DRY_RUN" = "1" ]; then echo "KEEPER_LIVE is not 1: dry run, nothing will be sent."; fi
+          node src/index.js --once

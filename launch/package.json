@@ -1,0 +1,17 @@
+{
+  "name": "@stocklane/launch",
+  "private": true,
+  "type": "module",
+  "description": "Launch $LANE on the Pons V2 launchpad (Robinhood Chain) from the StockLane dev wallet.",
+  "scripts": {
+    "preflight": "node launch.mjs",
+    "launch": "node launch.mjs --broadcast",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "dependencies": {
+    "viem": "^2.57.0"
+  }
+}

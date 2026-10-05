@@ -1,0 +1,22 @@
+{
+  "name": "StockLane",
+  "symbol": "LANE",
+  "logo": "",
+  "description": "StockLane routes tokenized-stock swaps on Robinhood Chain to the best price across Uniswap v3 and v4, checked against Chainlink. Swap fees buy and burn $LANE.",
+  "socials": {
+    "twitter": "",
+    "telegram": "",
+    "discord": "",
+    "website": "https://stocklane.fun",
+    "farcaster": ""
+  },
+  "launchConfigId": 0,
+  "pairToken": "0x0000000000000000000000000000000000000000",
+  "creatorFeeRecipient": "",
+  "creatorTaxBps": 0,
+  "buybackEnabled": true,
+  "salt": "",
+  "snipeTaxExemptions": [],
+  "devBuyEth": "0",
+  "devBuySlippageBps": 300
+}

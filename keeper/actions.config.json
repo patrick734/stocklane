@@ -1,0 +1,5 @@
+{
+  "minRouteUsdg": "5",
+  "minDrawdownUsdg": "10",
+  "slippageBps": 300
+}
