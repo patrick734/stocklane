@@ -83,8 +83,14 @@ This runs the complete deploy on a local copy of Robinhood Chain with your real 
 and sends nothing. It must end with `REHEARSAL PASSED`. The preflight also lists every stock with its Chainlink
 price and the Uniswap v3 pools it found, so you can see where liquidity is.
 
-Optional, to watch real swaps on the copy: `cd contracts && FORK=1 npx hardhat test` quotes 100 USDG into every
-stock across Uniswap v3 and v4 and executes the best routes.
+Then check the real pools:
+
+```bash
+./probe.sh
+```
+
+It quotes 100 USDG into every stock through the router's own code against the live Uniswap v3 and v4 pools,
+sells the shares back, and compares each price with Chainlink. It is read-only and needs no key.
 
 Then run the real deploy:
 

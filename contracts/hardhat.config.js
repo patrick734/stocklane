@@ -16,7 +16,7 @@ module.exports = {
   },
   paths: {
     sources: "./src",
-    tests: FORK ? "./test/fork" : "./test/unit",
+    tests: "./test/unit",
   },
   mocha: { timeout: FORK ? 600_000 : 60_000 },
   networks: {

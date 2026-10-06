@@ -16,7 +16,7 @@ Launch guide: [docs/LAUNCH.md](docs/LAUNCH.md). Security model: [docs/SECURITY.m
 
 ```bash
 cd contracts && npm ci && npx hardhat test          # unit tests
-FORK=1 npx hardhat test                             # real pools on a Robinhood Chain fork
+cd .. && ./probe.sh && cd contracts                 # quote the real pools, read-only
 npx hardhat node                                    # terminal 1
 npx hardhat run scripts/deploy.js --network localhost && node scripts/export-abis.js
 cd ../app && npm ci && NEXT_PUBLIC_ENABLE_LOCAL=1 npm run dev
