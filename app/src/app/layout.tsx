@@ -30,7 +30,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
           <main>{children}</main>
           <footer className="footer">
-            <span>StockLane. Independent software, not affiliated with Robinhood, Uniswap, Chainlink or any issuer. Not investment advice.</span>
             <span className="footer-links">
               <a href={X_URL} target="_blank" rel="noreferrer">X</a>
               <a href="/safety">Safety</a>
