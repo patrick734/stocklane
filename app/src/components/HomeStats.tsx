@@ -11,7 +11,7 @@ export function HomeStats() {
     <section className="stats">
       <div className="stat">
         <span>$LANE burned</span>
-        <b className="num">{p.laneToken ? fmtAmount(p.totalRetired, 18, 0) : "launching soon"}</b>
+        <b className="num">{fmtAmount(p.totalRetired ?? 0n, 18, 0)}</b>
       </div>
       <div className="stat">
         <span>Swap fee</span>

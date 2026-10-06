@@ -2,6 +2,7 @@
 
 import { useProtocol } from "@/hooks/useProtocol";
 import { fmtAmount, fmtBps, shortAddress } from "@/lib/format";
+import { LaneCA } from "@/components/LaneCA";
 import { explorer, tradeUrl } from "@/lib/links";
 
 export default function Burn() {
@@ -16,6 +17,7 @@ export default function Burn() {
         to DrawdownRetire, a contract with no withdraw function at all. A keeper uses it to buy $LANE on its Pons pool
         and burns everything it buys. Runs are capped and at most hourly, so a bad price can never cost much.
       </p>
+      <LaneCA />
       <div className="stats">
         <div className="stat">
           <span>$LANE burned</span>
@@ -36,10 +38,10 @@ export default function Burn() {
       </div>
       {p.laneTokenKnown && !p.laneToken && (
         <div className="card notice">
-          <h3>$LANE is not set yet</h3>
+          <h3>Burns start once the timelock connects $LANE</h3>
           <p>
-            The protocol launched first. $LANE launches on Pons, and the 48-hour timelock then sets it in DrawdownRetire,
-            once and permanently. Until then, fees wait safely in the contract.
+            $LANE is live on Pons. Connecting it to DrawdownRetire goes through the 48-hour public timelock, once and
+            permanently. Until it executes, swap fees wait safely in the contract and are used for the first burns.
           </p>
         </div>
       )}

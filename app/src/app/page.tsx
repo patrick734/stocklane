@@ -1,4 +1,5 @@
 import { HomeStats } from "@/components/HomeStats";
+import { LaneCA } from "@/components/LaneCA";
 import { SwapCard } from "@/components/SwapCard";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
             <li>Chainlink price guard on every swap, plus your own minimum</li>
             <li>No admin keys: every change waits 48 hours in a public timelock</li>
           </ul>
+          <LaneCA />
         </div>
         <SwapCard />
       </section>
