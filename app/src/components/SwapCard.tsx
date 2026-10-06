@@ -66,7 +66,7 @@ export function SwapCard() {
   async function swap() {
     if (!q || !deployment || !address || minOut === undefined || amountIn === null) return;
     const router = deployment.router as Address;
-    await tx.run("Swap", async ({ ensureAllowance }) => {
+    const done = await tx.run("Swap", async ({ ensureAllowance }) => {
       await ensureAllowance(tokenIn.address, router, amountIn);
       const deadline = BigInt(Math.floor(Date.now() / 1000) + 600);
       return tx.writeContractAsync({
@@ -77,6 +77,7 @@ export function SwapCard() {
         args: [tokenIn.address, tokenOut.address, amountIn, minOut, address, deadline, q.legs],
       });
     });
+    if (done) setInput("");
   }
 
   let action: { label: string; disabled: boolean } = { label: "Swap", disabled: false };

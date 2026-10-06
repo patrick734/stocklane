@@ -36,7 +36,8 @@ export function useTx() {
     await wait(await writeContractAsync({ address: token, abi: erc20Abi, chainId, functionName: "approve", args: [spender, amount] }));
   }
 
-  async function run(label: string, steps: (helpers: { ensureAllowance: typeof ensureAllowance }) => Promise<Hash>) {
+  /** Runs the steps and returns whether the transaction confirmed. */
+  async function run(label: string, steps: (helpers: { ensureAllowance: typeof ensureAllowance }) => Promise<Hash>): Promise<boolean> {
     setState({ busy: true, message: `${label}…` });
     try {
       if (walletChain !== chainId) {
@@ -48,9 +49,11 @@ export function useTx() {
       await wait(hash);
       setState({ busy: false, message: `${label}: confirmed` });
       await queryClient.invalidateQueries();
+      return true;
     } catch (e) {
       const err = e as { shortMessage?: string; message?: string };
       setState({ busy: false, error: err.shortMessage || err.message || "Transaction failed" });
+      return false;
     }
   }
 
