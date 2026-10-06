@@ -3,7 +3,7 @@ import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 import { Header } from "@/components/Header";
 import { Providers } from "@/components/Providers";
-import { GITHUB_URL, X_URL } from "@/lib/links";
+import { X_URL } from "@/lib/links";
 import "./globals.css";
 
 const display = Space_Grotesk({ subsets: ["latin"], variable: "--font-display", display: "swap" });
@@ -33,7 +33,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <span>StockLane. Independent software, not affiliated with Robinhood, Uniswap, Chainlink or any issuer. Not investment advice.</span>
             <span className="footer-links">
               <a href={X_URL} target="_blank" rel="noreferrer">X</a>
-              <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub</a>
               <a href="/safety">Safety</a>
             </span>
           </footer>

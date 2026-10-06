@@ -81,7 +81,7 @@ Addresses: contracts/deployments/robinhood.json
 Next:
   1. git add -A && git commit -m "Mainnet deployment" && git push      (Vercel publishes the live site)
   2. ./verify.sh                                                        (post the output: proof the deployer holds nothing)
-  3. Empty the dev wallet's leftover ETH into the next step's wallet; it has no other use now.
+  3. Keep ETH in the dev wallet: it launches $LANE on Pons next.
   4. Launch $LANE on Pons, then: ./set-token.sh <token address>   (48h timelock, then buy-and-burn starts)
   5. Keeper: GitHub > Actions > "Keeper" > Run workflow (dry run). When it looks healthy, set KEEPER_LIVE=1.
   6. Vercel: import the repo, Root Directory "app", then add your domain (stocklane.fun).
